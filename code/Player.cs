@@ -1,11 +1,18 @@
 ﻿using Sandbox;
+using Sandbox.UI;
+using DankRP;
 
-partial class SandboxPlayer : Player
+public partial class SandboxPlayer : Player
 {
 	private TimeSince timeSinceDropped;
 	private TimeSince timeSinceJumpReleased;
 
 	private DamageInfo lastDamage;
+
+	[Net, Change]
+	public DPlayer playerData { get; set; }
+
+	
 
 	/// <summary>
 	/// The clothing container is what dresses the citizen
@@ -20,6 +27,7 @@ partial class SandboxPlayer : Player
 		Inventory = new Inventory( this );
 	}
 
+
 	/// <summary>
 	/// Initialize using this client
 	/// </summary>
@@ -29,10 +37,20 @@ partial class SandboxPlayer : Player
 		Clothing.LoadFromClient( cl );
 	}
 
+	private void OnplayerDataChanged(DPlayer old, DPlayer ply)
+	{
+		if ( Host.IsClient )
+		{
+			Log.Warning( "PLAYER DATA UPADTED" );
+			Log.Info( "> " + ply.id  );
+		}
+	}
+
 	public override void Respawn()
 	{
-		SetModel( "models/citizen/citizen.vmdl" );
-
+		if ( DBase.getJob( playerData.job ).playerModel  != null) 
+			SetModel( DBase.getJob(playerData.job).playerModel );
+		
 		Controller = new WalkController();
 
 		if ( DevController is NoclipController )
@@ -45,7 +63,7 @@ partial class SandboxPlayer : Player
 		EnableHideInFirstPerson = true;
 		EnableShadowInFirstPerson = true;
 
-		Clothing.DressEntity( this );
+		//Clothing.DressEntity( this );
 
 		Inventory.Add( new PhysGun(), true );
 		Inventory.Add( new GravGun() );
@@ -55,7 +73,7 @@ partial class SandboxPlayer : Player
 		Inventory.Add( new Fists() );
 
 		CameraMode = new FirstPersonCamera();
-
+		
 		base.Respawn();
 	}
 
@@ -86,6 +104,13 @@ partial class SandboxPlayer : Player
 
 		Inventory.DropActive();
 		Inventory.DeleteContents();
+
+		if ( DBase.getJob(playerData.job).IsMayor)
+		{
+			DBase.setJob( this.Client.PlayerId.ToString(), DBase.config.default_job );
+			DankChatBox.announce( "Mayor (" + this.Client.Name + ") has died." );
+		}
+
 	}
 
 	public override void TakeDamage( DamageInfo info )

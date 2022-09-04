@@ -32,6 +32,10 @@ public partial class SpawnMenu : Panel
 
 				var models = body.AddChild<CloudModelList>();
 				tabs.AddButtonActive( "s&works", ( b ) => models.SetClass( "active", b ) );
+
+				var jobs = body.AddChild<Jobs>();
+				tabs.AddButtonActive( "Jobs", ( b ) => jobs.SetClass( "active", b ) );
+
 			}
 		}
 

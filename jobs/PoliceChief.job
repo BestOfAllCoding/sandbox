@@ -1,0 +1,13 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+{
+	data = 
+	{
+		JobCategory = "Goverment"
+		UniqueId = "POLICE_CHIEF"
+		Title = "Police Chief"
+		Description = "Fuck knows"
+		teamColor = "0.38824,0.67451,1,1"
+		playerModel = resource:"models/citizen/citizen.vmdl"
+		IsMayor = false
+	}
+}

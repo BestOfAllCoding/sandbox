@@ -1,24 +1,36 @@
 ﻿using Sandbox;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Collections.Generic;
+using DankRP;
 
 partial class SandboxGame : Game
 {
+	[Net]
+	DBase dbase { get; set; }
+
 	public SandboxGame()
 	{
 		if ( IsServer )
 		{
 			// Create the HUD
 			_ = new SandboxHud();
+			_ = new DHud();
+			dbase = new DBase();
 		}
+		
 	}
-
+	public static Dictionary<string, Client> connectedClients = new Dictionary<string, Client>();
 	public override void ClientJoined( Client cl )
 	{
 		base.ClientJoined( cl );
+		
 		var player = new SandboxPlayer( cl );
+		player.playerData = DBase.instance.data.loadPlayer( cl );
+		player.playerData.job = DBase.config.default_job;
+		player.playerData.Pawn = player;
 		player.Respawn();
-
+		connectedClients.Add( cl.PlayerId.ToString(), cl );
 		cl.Pawn = player;
 	}
 

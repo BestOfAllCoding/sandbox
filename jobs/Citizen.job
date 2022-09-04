@@ -1,0 +1,13 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:generic:version{7412167c-06e9-4698-aff2-e63eb59037e7} -->
+{
+	data = 
+	{
+		JobCategory = "Citizens"
+		UniqueId = "CITIZEN"
+		Title = "Citizen"
+		Description = "A citizen"
+		teamColor = "0.65098,0.75686,0.87843,1"
+		playerModel = resource:"models/citizen/citizen.vmdl"
+		IsMayor = false
+	}
+}

@@ -1,0 +1,54 @@
+
+BasicHud {
+    color: white;
+    font-size: 25px;
+    top: 0;
+    left: 0;
+    
+    width: 100%;
+    height: 70px;
+    background-color: rgba(25,25,25, 90%);
+    
+}
+
+
+
+HudItem {
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px 10px 10px 10px;
+} 
+
+Notification {
+    background-color: rgba(25,25,25, 99%);
+    right: 1;
+    bottom: 50px;
+    position: absolute;
+    width: 500px;
+    height: 70px;
+    border-left: 4px solid rgb(0, 226, 215);
+    color: white;
+}
+
+Notification .notification {
+    width: 100%;
+}
+
+Notification .notification-container {
+    width: 100%;
+    height: 100%;
+    font-size: 20px;
+    font-family: Poppins;
+    padding: 18px;
+}
+
+Notification .left {
+    width: 80px;
+    height: 100%;
+    background-color: rgba(0, 225, 255, 0.05);
+}
+Notification .left img {
+    height: 35px;
+    width: 35px;
+    margin: 15px;
+}
